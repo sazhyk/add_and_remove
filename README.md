@@ -7,7 +7,7 @@
 
 1. \<input id="id_book_set-TOTAL_FORMS" name="book_set-TOTAL_FORMS" type="hidden" value="1" /> - количество полей "Title" изначально. Это же количество в последствии передается на сервер при отправке формы.
 
-2. \<input id="id_book_set-MAX_NUM_FORMS" name="book_set-MAX_NUM_FORMS" type="hidden" value="10" /> - максимальное количество полей, которое может быть в форме.
+2. \<input id="id_book_set-MAX_NUM_FORMS" name="book_set-MAX_NUM_FORMS" type="hidden" value="10" /> - максимальное количество полей "Title", которое может быть в форме.
 
 
 Скрипт должен получить "value" из "input id="id_book_set-MAX_NUM_FORMS"" и не позволять создавать большее количество блоков.
