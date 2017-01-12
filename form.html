@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
     <script>
-        $( document ).ready(function() {
+        $( document ).ready(function () {
 //        var formsCount = $("#id_book_set-MAX_NUM_FORMS").val();
             formsCount = 9;
             var html = '';
             var i = 1;
 
-            $("html").on('click', '.add-formset', function(){
+            $("html").on('click', '.add-formset', function addElement(){
 
                 if ($("#id_book_set-TOTAL_FORMS").val() <= formsCount) {
 
@@ -20,7 +19,7 @@
                     html += '<div class="formset-item" id="formset-item-'+i+'">';
                     html += '<label for="id_book_set-'+i+'-title">Title:</label>';
                     html += '<input id="id_book_set-'+i+'-title" maxlength="100" name="book_set-'+i+'-title" type="text" />';
-                    html += '<input type="button" onclick="deleteItem(this)" class="del-formset" value="del" />';
+                    html += '<input type="button" class="del-formset" value="del" />';
                     html += '</div>';
 
                     $("#formset").append(html);
@@ -34,16 +33,21 @@
                 }
             });
 
-//        $("html").on( "click", ".del-formset", function() {
-//            var numElem = $(this).parent().attr('id');
-//            console.log('"#'+numElem+'"');
-//            $('"#'+numElem+'"').remove();
-//        });
+            $("html").on( "click", ".del-formset", function() {
+                var numElem = $(this).parent().attr('id');
+                console.log('"#'+numElem+'"');
+                $('#'+numElem).remove();
+
+                i--;
+
+                $("#id_book_set-TOTAL_FORMS").val(i);
+            });
         });
 
-        function deleteItem(element) {
-            $(element).parent().remove();
-        }
+//        function deleteItem(element) {
+//            $(element).parent().remove();
+//            console.log(element);
+//        }
     </script>
 
 </head>
