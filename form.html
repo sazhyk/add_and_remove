@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script>
+        $( document ).ready(function() {
+//        var formsCount = $("#id_book_set-MAX_NUM_FORMS").val();
+            formsCount = 9;
+            var html = '';
+            var i = 1;
+
+            $("html").on('click', '.add-formset', function(){
+
+                if ($("#id_book_set-TOTAL_FORMS").val() <= formsCount) {
+
+                    html = '';
+                    html += '<div class="formset-item" id="formset-item-'+i+'">';
+                    html += '<label for="id_book_set-'+i+'-title">Title:</label>';
+                    html += '<input id="id_book_set-'+i+'-title" maxlength="100" name="book_set-'+i+'-title" type="text" />';
+                    html += '<input type="button" onclick="deleteItem(this)" class="del-formset" value="del" />';
+                    html += '</div>';
+
+                    $("#formset").append(html);
+
+                    i++;
+
+                    $("#id_book_set-TOTAL_FORMS").val(i);
+                }
+                else {
+                    alert("Не более 10 полей!");
+                }
+            });
+
+//        $("html").on( "click", ".del-formset", function() {
+//            var numElem = $(this).parent().attr('id');
+//            console.log('"#'+numElem+'"');
+//            $('"#'+numElem+'"').remove();
+//        });
+        });
+
+        function deleteItem(element) {
+            $(element).parent().remove();
+        }
+    </script>
+
+</head>
+<body>
+
+<form action="." method="post" class="recipe_form">
+    <input type='hidden' name='csrfmiddlewaretoken' value='6c8MxA6cAjA2a75H7QbATliuBwO8Xy1xl4JNgga4FUVpQruRCYMSolZJY2eSdCYn' />
+    <div>
+        <div style="margin: 5px">
+            <div class="">
+                <label for="id_name">Name:</label>
+                <input id="id_name" maxlength="100" name="name" type="text" required />
+            </div>
+        </div>
+        <div style="margin: 5px">
+            <div id="management-form">
+                <input id="id_book_set-TOTAL_FORMS" name="book_set-TOTAL_FORMS" type="hidden" value="1" />
+                <input id="id_book_set-INITIAL_FORMS" name="book_set-INITIAL_FORMS" type="hidden" value="0" />
+                <input id="id_book_set-MIN_NUM_FORMS" name="book_set-MIN_NUM_FORMS" type="hidden" value="0" />
+                <input id="id_book_set-MAX_NUM_FORMS" name="book_set-MAX_NUM_FORMS" type="hidden" value="10" />
+            </div>
+            <div id="formset">
+
+                <div class="formset-item" id="formset-item-0">
+                    <label for="id_book_set-0-title">Title:</label>
+                    <input id="id_book_set-0-title" maxlength="100" name="book_set-0-title" type="text" />
+                    <input type="button" class="add-formset" value="add" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <input type="submit" name="submit" value="Submit" class="button">
+</form>
+
+</body>
+</html>
