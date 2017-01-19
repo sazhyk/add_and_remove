@@ -6,17 +6,15 @@
 
     <script>
         $( document ).ready(function () {
-//        var formsCount = $("#id_book_set-MAX_NUM_FORMS").val();
-            formsCount = 9;
-            var html = '';
-            var i = 1;
+            var formsCount = $("#id_book_set-MAX_NUM_FORMS").val(); // Переменной присваиваем значение, равное максимальному количеству форм
+            var i = $("#id_book_set-TOTAL_FORMS").val(); // Переменная, которая содержит значение, равное количеству форм на данный момент
 
-            $("html").on('click', '.add-formset', function addElement(){
+            $("html").on('click', '.add-formset', function addElement(){ // Добавляем поля
 
-                if ($("#id_book_set-TOTAL_FORMS").val() <= formsCount) {
+                if (i < formsCount) {
 
                     html = '';
-                    html += '<div class="formset-item" id="formset-item-'+i+'">';
+                    html += '<div class="formset-item">';
                     html += '<label for="id_book_set-'+i+'-title">Title:</label>';
                     html += '<input id="id_book_set-'+i+'-title" maxlength="100" name="book_set-'+i+'-title" type="text" />';
                     html += '<input type="button" class="del-formset" value="del" />';
@@ -27,16 +25,15 @@
                     i++;
 
                     $("#id_book_set-TOTAL_FORMS").val(i);
+                    
+                } else {
+                    alert("Не более 10 полей!"); // Шлем лесом, если полей уже хватит
                 }
-                else {
-                    alert("Не более 10 полей!");
-                }
+
             });
 
-            $("html").on( "click", ".del-formset", function() {
-                var numElem = $(this).parent().attr('id');
-                console.log('"#'+numElem+'"');
-                $('#'+numElem).remove();
+            $("html").on( "click", ".del-formset", function delElement() { // Удаляем поля
+                $(this).parent().remove();
 
                 i--;
 
@@ -44,10 +41,6 @@
             });
         });
 
-//        function deleteItem(element) {
-//            $(element).parent().remove();
-//            console.log(element);
-//        }
     </script>
 
 </head>
@@ -71,7 +64,7 @@
             </div>
             <div id="formset">
 
-                <div class="formset-item" id="formset-item-0">
+                <div class="formset-item">
                     <label for="id_book_set-0-title">Title:</label>
                     <input id="id_book_set-0-title" maxlength="100" name="book_set-0-title" type="text" />
                     <input type="button" class="add-formset" value="add" />
